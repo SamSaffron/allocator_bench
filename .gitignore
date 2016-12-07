@@ -1,0 +1,6 @@
+gperftools/*
+Hoard/*
+jemalloc/*
+jemalloc_lib/*
+lockless_allocator/*
+tcmalloc_lib/*
