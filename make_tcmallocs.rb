@@ -2,7 +2,7 @@
 
 unless Dir.exist? 'gperftools'
   puts "Checking out initial source"
-  `git https://github.com/gperftools/gperftools.git`
+  `git clone https://github.com/gperftools/gperftools.git`
 end
 
 
