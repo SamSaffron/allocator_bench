@@ -3,7 +3,7 @@ To run benchmarks
 1. Install lockless from https://locklessinc.com/downloads/ in lockless_allocator path make
 2. Install Hoard from https://github.com/emeryberger/Hoard in Hoard and make
 3. Run `ruby make_jemallocs.rb`
-4. Run `ruby make_tcmallocs.rb`
+4. Run `ruby make_tcmallocs.rb`  # You need to install libunwind-dev before
 5. Run `ruby test_all.rb`
 
 Results:
