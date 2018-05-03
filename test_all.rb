@@ -1,5 +1,12 @@
 pwd = `pwd`.strip
 
+ENV.delete 'LD_PRELOAD'
+ENV.keys.each do |k|
+  if k =~ /^RUBY_/
+    ENV.delete k
+  end
+end
+
 puts `ruby --version`
 mem,duration = `ruby stress_mem.rb`.strip.split(",")
 puts "built-in mem: #{mem} duration: #{duration}"
