@@ -9,6 +9,7 @@ To run benchmarks
 Results:
 
 ```
+ruby 2.5.1p57 (2018-03-29 revision 63029) [x86_64-linux]
 built-in mem: 173192 duration: 4.638066078
 Using the Hoard memory allocator (http://www.hoard.org), version 3.12.0
 Using the Hoard memory allocator (http://www.hoard.org), version 3.12.0
