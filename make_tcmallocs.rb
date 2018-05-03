@@ -27,6 +27,11 @@ build_tag("gperftools-2.2")
 build_tag("gperftools-2.3")
 build_tag("gperftools-2.4")
 build_tag("gperftools-2.5")
+build_tag("gperftools-2.6")
+build_tag("gperftools-2.6.1")
+build_tag("gperftools-2.6.2")
+build_tag("gperftools-2.6.3")
+build_tag("gperftools-2.7")
 
 
 

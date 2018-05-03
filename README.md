@@ -9,46 +9,51 @@ To run benchmarks
 Results:
 
 ```
-sam@ubuntu allocators % ruby test_all.rb
+sam@ubuntu allocator_bench % ruby test_all.rb
 ruby 2.5.1p57 (2018-03-29 revision 63029) [x86_64-linux]
-built-in mem: 173192 duration: 4.638066078
+built-in mem: 136560 duration: 4.92845984
 Using the Hoard memory allocator (http://www.hoard.org), version 3.12.0
 Using the Hoard memory allocator (http://www.hoard.org), version 3.12.0
 Using the Hoard memory allocator (http://www.hoard.org), version 3.12.0
 Using the Hoard memory allocator (http://www.hoard.org), version 3.12.0
-Hoard HEAD mem: 195960 duration: 4.062823477
-lockless 1.4 mem: 159424 duration: 3.620970112
-tcmalloc 2.0 mem: 138056 duration: 3.862068019
-tcmalloc 2.1 mem: 145632 duration: 3.735112744
-tcmalloc 2.2 mem: 138488 duration: 3.787477555
-tcmalloc 2.3 mem: 173184 duration: 3.700215836
-tcmalloc 2.4 mem: 138236 duration: 3.878487951
-tcmalloc 2.5 mem: 140532 duration: 3.824444351
-jemalloc 3.0.0 mem: 162328 duration: 3.965587042
-jemalloc 3.1.0 mem: 136324 duration: 3.951544536
-jemalloc 3.2.0 mem: 165068 duration: 4.314828207
-jemalloc 3.3.0 mem: 133872 duration: 4.276595265
-jemalloc 3.3.1 mem: 165136 duration: 3.932839073
-jemalloc 3.4.0 mem: 165248 duration: 3.961460742
-jemalloc 3.4.1 mem: 165240 duration: 3.942153044
-jemalloc 3.5.0 mem: 138028 duration: 4.013618577
-jemalloc 3.5.1 mem: 133844 duration: 3.982648907
-jemalloc 3.6.0 mem: 138100 duration: 3.945349745
-jemalloc 4.0.0 mem: 139756 duration: 4.30952471
-jemalloc 4.0.1 mem: 176468 duration: 3.785420352
-jemalloc 4.0.2 mem: 139708 duration: 4.218279437
-jemalloc 4.0.3 mem: 176388 duration: 3.818446195
-jemalloc 4.0.4 mem: 175956 duration: 3.808784445
-jemalloc 4.1.0 mem: 157256 duration: 3.863407003
-jemalloc 4.1.1 mem: 142088 duration: 3.854477111
-jemalloc 4.2.0 mem: 141996 duration: 3.86821559
-jemalloc 4.2.1 mem: 142804 duration: 3.895340937
-jemalloc 4.3.0 mem: 170628 duration: 4.617705681
-jemalloc 4.3.1 mem: 142840 duration: 3.853970848
-jemalloc 4.4.0 mem: 142120 duration: 4.148708165
-jemalloc 4.5.0 mem: 141252 duration: 3.984665138
-jemalloc 5.0.0 mem: 113544 duration: 3.842704218
-jemalloc 5.0.1 mem: 159032 duration: 3.963963944
+Hoard HEAD mem: 167772 duration: 4.231493358
+lockless 1.4 mem: 166860 duration: 3.567809758
+tcmalloc 2.0 mem: 138608 duration: 3.96352459
+tcmalloc 2.1 mem: 145676 duration: 3.821032815
+tcmalloc 2.2 mem: 141204 duration: 3.830105653
+tcmalloc 2.3 mem: 139096 duration: 3.777037605
+tcmalloc 2.4 mem: 137548 duration: 3.826598715
+tcmalloc 2.5 mem: 139524 duration: 3.825563646
+tcmalloc 2.6 mem: 141256 duration: 3.857502124
+tcmalloc 2.6.1 mem: 141500 duration: 3.778023667
+tcmalloc 2.6.2 mem: 141244 duration: 3.798630141
+tcmalloc 2.6.3 mem: 140320 duration: 3.824998923
+tcmalloc 2.7 mem: 143192 duration: 3.726972205
+jemalloc 3.0.0 mem: 141232 duration: 4.177167928
+jemalloc 3.1.0 mem: 162304 duration: 3.939940393
+jemalloc 3.2.0 mem: 165188 duration: 3.929158876
+jemalloc 3.3.0 mem: 165164 duration: 4.135042063
+jemalloc 3.3.1 mem: 153676 duration: 4.08339298
+jemalloc 3.4.0 mem: 142332 duration: 4.287041471
+jemalloc 3.4.1 mem: 165240 duration: 4.025545814
+jemalloc 3.5.0 mem: 133892 duration: 4.065554619
+jemalloc 3.5.1 mem: 165216 duration: 4.079860268
+jemalloc 3.6.0 mem: 165164 duration: 4.233464591
+jemalloc 4.0.0 mem: 141336 duration: 4.574956268
+jemalloc 4.0.1 mem: 170944 duration: 4.248128008
+jemalloc 4.0.2 mem: 177168 duration: 4.329534696
+jemalloc 4.0.3 mem: 173996 duration: 3.920414509
+jemalloc 4.0.4 mem: 166488 duration: 4.043237997
+jemalloc 4.1.0 mem: 144080 duration: 4.084126294
+jemalloc 4.1.1 mem: 140752 duration: 4.122630669
+jemalloc 4.2.0 mem: 141840 duration: 4.434104776
+jemalloc 4.2.1 mem: 142844 duration: 4.346471957
+jemalloc 4.3.0 mem: 176972 duration: 4.883788911
+jemalloc 4.3.1 mem: 142052 duration: 4.234083442
+jemalloc 4.4.0 mem: 142344 duration: 4.159591159
+jemalloc 4.5.0 mem: 139484 duration: 3.954587993
+jemalloc 5.0.0 mem: 166592 duration: 4.013335086
+jemalloc 5.0.1 mem: 173500 duration: 3.979304747
 ```
 
 
