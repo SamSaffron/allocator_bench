@@ -9,11 +9,11 @@ tags = `cd jemalloc && git tag && cd -`.split("\n")
 
 def build_tag(tag)
   `mkdir -p #{@pwd}/jemalloc_lib/#{tag}`
-  `cd jemalloc && git clean -f && git checkout #{tag} && autoconf && ./configure --prefix=#{@pwd}/jemalloc_lib/#{tag} && make install && git clean -f && cd -`
+  `cd jemalloc && git clean -f && git checkout #{tag} && autoconf && ./configure --prefix=#{@pwd}/jemalloc_lib/#{tag} && make && make install_bin install_include install_lib && git clean -f && cd -`
 end
 
 tags.each do |t|
-  build_tag(t) if t > "2.2.5"
+  build_tag(t) if t > "4.5.0"
 end
 
 
