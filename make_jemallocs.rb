@@ -8,8 +8,9 @@ end
 tags = `cd jemalloc && git tag && cd -`.split("\n")
 
 def build_tag(tag)
+  p "Branch with tag: #{tag}"
   `mkdir -p #{@pwd}/jemalloc_lib/#{tag}`
-  `cd jemalloc && git clean -f && git checkout #{tag} && autoconf && ./configure --prefix=#{@pwd}/jemalloc_lib/#{tag} && make && make install_bin install_include install_lib && git clean -f && cd -`
+  `cd jemalloc && git clean -f && git checkout #{tag} && autoconf && ./configure --prefix=#{@pwd}/jemalloc_lib/#{tag} && make && make install_bin install_include install_lib && make relclean && git clean -f && cd -`
 end
 
 tags.each do |t|
