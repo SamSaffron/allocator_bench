@@ -17,7 +17,7 @@ Use `STRESS_THREADS=N` to simulate multi threaded ruby behavior
 allocator_bench % STRESS_THREADS=1 ruby test_all.rb
 ruby 2.6.3p62 (2019-04-16 revision 67580) [x86_64-linux]
 built-in mem: 168676 duration: 3.097120389
-built-in mem (2 arena malloc): 168884 duration: 3.141805418
+built-in mem (MALLOC_ARENA_MAX=2): 168884 duration: 3.141805418
 mimalloc master: 179760 duration: 2.692077789
 tcmalloc 2.0 mem: 139948 duration: 2.931045746
 tcmalloc 2.1 mem: 139556 duration: 2.931866837
