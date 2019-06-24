@@ -2,11 +2,119 @@ To run benchmarks
 
 1. Install lockless from https://locklessinc.com/downloads/ in lockless_allocator path make
 2. Install Hoard from https://github.com/emeryberger/Hoard in Hoard and make
-3. Run `ruby make_jemallocs.rb`
-4. Run `ruby make_tcmallocs.rb`  # You need to install libunwind-dev before
-5. Run `ruby test_all.rb`
+4. Run `ruby make_jemallocs.rb`
+5. Run `ruby make_tcmallocs.rb`  # You need to install libunwind-dev before
+3. Run `ruby make_mimalloc.rb`
+6. Run `ruby test_all.rb`
+7. Run `STRESS_THREAD=10 ruby test_all.rb`
 
-Results:
+Results: (current)
+
+Use `STRESS_THREADS=N` to simulate multi threaded ruby behavior
+
+
+```
+allocator_bench % STRESS_THREADS=1 ruby test_all.rb
+ruby 2.6.3p62 (2019-04-16 revision 67580) [x86_64-linux]
+built-in mem: 168676 duration: 3.097120389
+built-in mem (2 arena malloc): 168884 duration: 3.141805418
+mimalloc master: 179760 duration: 2.692077789
+tcmalloc 2.0 mem: 139948 duration: 2.931045746
+tcmalloc 2.1 mem: 139556 duration: 2.931866837
+tcmalloc 2.2 mem: 139920 duration: 2.907351515
+tcmalloc 2.3 mem: 169508 duration: 2.575296785
+tcmalloc 2.4 mem: 142676 duration: 2.759707597
+tcmalloc 2.5 mem: 140288 duration: 2.809801552
+tcmalloc 2.6 mem: 156540 duration: 2.81194421
+tcmalloc 2.6.1 mem: 159024 duration: 2.471327449
+tcmalloc 2.6.2 mem: 142540 duration: 2.841949871
+tcmalloc 2.6.3 mem: 142264 duration: 2.866289953
+tcmalloc 2.7 mem: 174628 duration: 2.524599463
+jemalloc 3.0.0 mem: 131896 duration: 3.127378822
+jemalloc 3.1.0 mem: 143372 duration: 2.830273958
+jemalloc 3.2.0 mem: 144568 duration: 2.822619706
+jemalloc 3.3.0 mem: 144396 duration: 2.815244177
+jemalloc 3.3.1 mem: 148388 duration: 2.717397762
+jemalloc 3.4.0 mem: 144216 duration: 2.866729839
+jemalloc 3.4.1 mem: 144200 duration: 2.874322523
+jemalloc 3.5.0 mem: 144208 duration: 2.879210684
+jemalloc 3.5.1 mem: 144496 duration: 2.873911191
+jemalloc 3.6.0 mem: 152596 duration: 2.710074967
+jemalloc 4.0.0 mem: 169376 duration: 2.776187371
+jemalloc 4.0.1 mem: 182824 duration: 2.734378037
+jemalloc 4.0.2 mem: 184424 duration: 2.846067147
+jemalloc 4.0.3 mem: 170880 duration: 2.757896799
+jemalloc 4.0.4 mem: 169400 duration: 2.716667451
+jemalloc 4.1.0 mem: 169024 duration: 2.680531562
+jemalloc 4.1.1 mem: 170920 duration: 2.707289877
+jemalloc 4.2.0 mem: 170436 duration: 2.725028777
+jemalloc 4.2.1 mem: 171100 duration: 2.763685352
+jemalloc 4.3.0 mem: 200348 duration: 2.777401994
+jemalloc 4.3.1 mem: 171044 duration: 2.69347195
+jemalloc 4.4.0 mem: 150192 duration: 2.750083808
+jemalloc 4.5.0 mem: 170764 duration: 2.685679574
+jemalloc 5.0.0 mem: 167644 duration: 2.67587911
+jemalloc 5.0.1 mem: 168552 duration: 2.670171963
+jemalloc 5.1.0 mem: 168660 duration: 2.686125988
+jemalloc 5.2.0 mem: 151672 duration: 2.682894219
+lockless 1.4 mem: 161984 duration: 2.618409497
+```
+
+Multithreaded results highlights the importance of `MALLOC_ARENA_MAX`
+in multithreaded setups where you are not using jemalloc/tcmalloc
+
+
+```
+allocator_bench % STRESS_THREADS=10 ruby test_all.rb
+ruby 2.6.3p62 (2019-04-16 revision 67580) [x86_64-linux]
+built-in mem: 216980 duration: 3.117673145
+built-in mem (MALLOC_ARENA_MAX=2): 143356 duration: 2.996984896
+mimalloc master: 305564 duration: 2.685818191
+tcmalloc 2.0 mem: 140744 duration: 2.621780967
+tcmalloc 2.1 mem: 125140 duration: 2.859994774
+tcmalloc 2.2 mem: 130000 duration: 2.78946289
+tcmalloc 2.3 mem: 135552 duration: 2.695206943
+tcmalloc 2.4 mem: 136544 duration: 2.72213317
+tcmalloc 2.5 mem: 127880 duration: 2.721207716
+tcmalloc 2.6 mem: 134560 duration: 2.657063104
+tcmalloc 2.6.1 mem: 136412 duration: 2.600121801
+tcmalloc 2.6.2 mem: 134404 duration: 2.627586324
+tcmalloc 2.6.3 mem: 137876 duration: 2.581387615
+tcmalloc 2.7 mem: 142700 duration: 2.56388183
+jemalloc 3.0.0 mem: 156604 duration: 2.895129385
+jemalloc 3.1.0 mem: 172904 duration: 2.743504098
+jemalloc 3.2.0 mem: 137008 duration: 3.101546043
+jemalloc 3.3.0 mem: 143572 duration: 2.849554748
+jemalloc 3.3.1 mem: 150848 duration: 2.829801844
+jemalloc 3.4.0 mem: 140960 duration: 2.870878932
+jemalloc 3.4.1 mem: 141380 duration: 2.878213663
+jemalloc 3.5.0 mem: 142400 duration: 2.895826832
+jemalloc 3.5.1 mem: 140048 duration: 2.929284167
+jemalloc 3.6.0 mem: 142880 duration: 2.896521471
+jemalloc 4.0.0 mem: 155036 duration: 2.821764098
+jemalloc 4.0.1 mem: 147468 duration: 2.793140141
+jemalloc 4.0.2 mem: 148596 duration: 2.925717719
+jemalloc 4.0.3 mem: 159516 duration: 2.776216964
+jemalloc 4.0.4 mem: 166552 duration: 2.719755091
+jemalloc 4.1.0 mem: 163320 duration: 2.680735558
+jemalloc 4.1.1 mem: 160356 duration: 2.734943065
+jemalloc 4.2.0 mem: 167952 duration: 2.772462577
+jemalloc 4.2.1 mem: 153928 duration: 2.769602123
+jemalloc 4.3.0 mem: 179132 duration: 2.741271879
+jemalloc 4.3.1 mem: 164104 duration: 2.671498417
+jemalloc 4.4.0 mem: 174240 duration: 2.764872875
+jemalloc 4.5.0 mem: 176092 duration: 2.730592457
+jemalloc 5.0.0 mem: 166956 duration: 2.83930075
+jemalloc 5.0.1 mem: 178680 duration: 2.690214995
+jemalloc 5.1.0 mem: 162288 duration: 2.844753497
+jemalloc 5.2.0 mem: 178348 duration: 2.652822422
+lockless 1.4 mem: 280440 duration: 2.686996364
+```
+
+
+
+
+Results: (old)
 
 ```
 sam@ubuntu allocator_bench % ruby test_all.rb

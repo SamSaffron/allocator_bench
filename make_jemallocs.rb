@@ -16,6 +16,3 @@ end
 tags.each do |t|
   build_tag(t) if t > "4.5.0"
 end
-
-
-

@@ -4,3 +4,9 @@ jemalloc/*
 jemalloc_lib/*
 lockless_allocator/*
 tcmalloc_lib/*
+Hoard
+gperftools/*
+gperftools
+jemalloc
+mimalloc_lib
+mimalloc
