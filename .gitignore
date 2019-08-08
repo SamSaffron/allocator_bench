@@ -10,3 +10,6 @@ gperftools
 jemalloc
 mimalloc_lib
 mimalloc
+rpmalloc_lib
+rpmalloc
+
