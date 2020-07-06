@@ -14,5 +14,5 @@ def build_tag(tag)
 end
 
 tags.each do |t|
-  build_tag(t) if t > "4.5.0"
+  build_tag(t) if t > "3.5.0"
 end

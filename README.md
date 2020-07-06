@@ -12,107 +12,95 @@ Results: (current)
 
 Use `STRESS_THREADS=N` to simulate multi threaded ruby behavior
 
-
-```
-allocator_bench % STRESS_THREADS=1 ruby test_all.rb
-ruby 2.6.3p62 (2019-04-16 revision 67580) [x86_64-linux]
-built-in mem: 168956 duration: 3.088811037
-built-in mem (MALLOC_ARENA_MAX=2): 168732 duration: 3.118196841
-mimalloc master: 148968 duration: 2.971000958
-rpmalloc master: 150048 duration: 3.158120957
-tcmalloc 2.0 mem: 139376 duration: 2.949512014
-tcmalloc 2.1 mem: 139804 duration: 2.864627799
-tcmalloc 2.2 mem: 140500 duration: 2.8446297
-tcmalloc 2.3 mem: 139568 duration: 2.916504693
-tcmalloc 2.4 mem: 173760 duration: 2.59109293
-tcmalloc 2.5 mem: 140044 duration: 2.887631572
-tcmalloc 2.6 mem: 144024 duration: 2.892587755
-tcmalloc 2.6.1 mem: 143464 duration: 2.815790592
-tcmalloc 2.6.2 mem: 143308 duration: 2.801355854
-tcmalloc 2.6.3 mem: 143412 duration: 2.79778578
-tcmalloc 2.7 mem: 142372 duration: 2.865414789
-jemalloc 3.0.0 mem: 143936 duration: 2.854970272
-jemalloc 3.1.0 mem: 119240 duration: 2.87959642
-jemalloc 3.2.0 mem: 144176 duration: 2.893079291
-jemalloc 3.3.0 mem: 144424 duration: 2.874652414
-jemalloc 3.3.1 mem: 144432 duration: 2.979426346
-jemalloc 3.4.0 mem: 136196 duration: 3.194614895
-jemalloc 3.4.1 mem: 136192 duration: 3.163906766
-jemalloc 3.5.0 mem: 136252 duration: 3.200070938
-jemalloc 3.5.1 mem: 136164 duration: 3.136768047
-jemalloc 3.6.0 mem: 136212 duration: 3.115268106
-jemalloc 4.0.0 mem: 171064 duration: 2.765127381
-jemalloc 4.0.1 mem: 169512 duration: 2.809184624
-jemalloc 4.0.2 mem: 169300 duration: 2.710827099
-jemalloc 4.0.3 mem: 177484 duration: 2.798859274
-jemalloc 4.0.4 mem: 150356 duration: 2.762065634
-jemalloc 4.1.0 mem: 169376 duration: 2.728441564
-jemalloc 4.1.1 mem: 177644 duration: 2.714580024
-jemalloc 4.2.0 mem: 170888 duration: 2.717521136
-jemalloc 4.2.1 mem: 171296 duration: 2.666115584
-jemalloc 4.3.0 mem: 206492 duration: 2.840541664
-jemalloc 4.3.1 mem: 169248 duration: 2.665492603
-jemalloc 4.4.0 mem: 172548 duration: 2.731029773
-jemalloc 4.5.0 mem: 171016 duration: 2.716921755
-jemalloc 5.0.0 mem: 168532 duration: 2.676492527
-jemalloc 5.0.1 mem: 169548 duration: 2.730049283
-jemalloc 5.1.0 mem: 167112 duration: 2.779946994
-jemalloc 5.2.0 mem: 151676 duration: 2.750777831
-lockless 1.4 mem: 161816 duration: 2.652849054
-```
-
-Multithreaded results highlights the importance of `MALLOC_ARENA_MAX`
-in multithreaded setups where you are not using jemalloc/tcmalloc
+### 8 threads
 
 
 ```
-ruby 2.6.3p62 (2019-04-16 revision 67580) [x86_64-linux]
-built-in mem: 248824 duration: 3.153443778
-built-in mem (MALLOC_ARENA_MAX=2): 135548 duration: 3.367664694
-mimalloc master: 318796 duration: 2.819220925
-rpmalloc master: 238052 duration: 2.894455606
-tcmalloc 2.0 mem: 151272 duration: 2.647027734
-tcmalloc 2.1 mem: 147864 duration: 2.692278572
-tcmalloc 2.2 mem: 153284 duration: 2.659121726
-tcmalloc 2.3 mem: 137320 duration: 2.715402215
-tcmalloc 2.4 mem: 144336 duration: 2.678387466
-tcmalloc 2.5 mem: 126628 duration: 2.842295206
-tcmalloc 2.6 mem: 138108 duration: 2.692514818
-tcmalloc 2.6.1 mem: 149924 duration: 2.606778882
-tcmalloc 2.6.2 mem: 146808 duration: 2.661948119
-tcmalloc 2.6.3 mem: 139216 duration: 2.868227793
-tcmalloc 2.7 mem: 149700 duration: 2.665362155
-jemalloc 3.0.0 mem: 159348 duration: 2.800902898
-jemalloc 3.1.0 mem: 171336 duration: 2.823129806
-jemalloc 3.2.0 mem: 153252 duration: 3.064922478
-jemalloc 3.3.0 mem: 147532 duration: 3.330849921
-jemalloc 3.3.1 mem: 136924 duration: 3.172098706
-jemalloc 3.4.0 mem: 136452 duration: 3.070144441
-jemalloc 3.4.1 mem: 141612 duration: 3.194645612
-jemalloc 3.5.0 mem: 143252 duration: 3.416616537
-jemalloc 3.5.1 mem: 147184 duration: 3.193455258
-jemalloc 3.6.0 mem: 148028 duration: 3.161889745
-jemalloc 4.0.0 mem: 166248 duration: 2.934005061
-jemalloc 4.0.1 mem: 154064 duration: 2.824123004
-jemalloc 4.0.2 mem: 152512 duration: 3.037654685
-jemalloc 4.0.3 mem: 157084 duration: 2.867739198
-jemalloc 4.0.4 mem: 156744 duration: 2.938911222
-jemalloc 4.1.0 mem: 150632 duration: 2.874437362
-jemalloc 4.1.1 mem: 159136 duration: 2.761380049
-jemalloc 4.2.0 mem: 164380 duration: 2.821185228
-jemalloc 4.2.1 mem: 151372 duration: 2.857463988
-jemalloc 4.3.0 mem: 185424 duration: 2.800370469
-jemalloc 4.3.1 mem: 151052 duration: 2.781846973
-jemalloc 4.4.0 mem: 184984 duration: 2.699202281
-jemalloc 4.5.0 mem: 161376 duration: 2.996896429
-jemalloc 5.0.0 mem: 174656 duration: 2.795937639
-jemalloc 5.0.1 mem: 172904 duration: 2.870548357
-jemalloc 5.1.0 mem: 178436 duration: 2.671000016
-jemalloc 5.2.0 mem: 168644 duration: 2.700487403
-lockless 1.4 mem: 331444 duration: 2.655562831
+sam@arch allocator_bench % STRESS_THREADS=8 ruby test_all.rb
+ruby 2.6.5p114 (2019-10-01 revision 67812) [x86_64-linux]
+built-in mem: 186336 duration: 3.422897896
+built-in mem (MALLOC_ARENA_MAX=2): 135780 duration: 3.492815563
+mimalloc master: 236204 duration: 2.947209624
+rpmalloc master: 291428 duration: 2.823917527
+tcmalloc 2.0 mem: 142860 duration: 2.796963668
+tcmalloc 2.1 mem: 134952 duration: 2.9891215
+tcmalloc 2.2 mem: 131860 duration: 2.965217507
+tcmalloc 2.3 mem: 132268 duration: 2.992975175
+tcmalloc 2.4 mem: 141756 duration: 2.817269882
+tcmalloc 2.5 mem: 136376 duration: 2.763516053
+tcmalloc 2.6 mem: 135892 duration: 2.837330961
+tcmalloc 2.6.1 mem: 138776 duration: 2.800292649
+tcmalloc 2.6.2 mem: 133392 duration: 2.785083378
+tcmalloc 2.6.3 mem: 128448 duration: 2.870347233
+tcmalloc 2.7 mem: 134840 duration: 2.816580265
+jemalloc 3.5.1 mem: 153808 duration: 2.98163907
+jemalloc 3.6.0 mem: 139564 duration: 3.122444062
+jemalloc 4.0.0 mem: 151132 duration: 3.001511518
+jemalloc 4.0.1 mem: 152276 duration: 3.017984175
+jemalloc 4.0.2 mem: 150684 duration: 2.993723311
+jemalloc 4.0.3 mem: 157552 duration: 2.955524769
+jemalloc 4.0.4 mem: 153460 duration: 2.995114601
+jemalloc 4.1.0 mem: 148816 duration: 2.962291218
+jemalloc 4.1.1 mem: 146660 duration: 2.951603234
+jemalloc 4.2.0 mem: 147800 duration: 2.956029203
+jemalloc 4.2.1 mem: 148324 duration: 2.968610441
+jemalloc 4.3.0 mem: 169020 duration: 3.110291342
+jemalloc 4.3.1 mem: 151936 duration: 2.967231767
+jemalloc 4.4.0 mem: 160780 duration: 2.977113841
+jemalloc 4.5.0 mem: 158028 duration: 2.949980599
+jemalloc 5.0.0 mem: 157076 duration: 3.068324983
+jemalloc 5.0.1 mem: 169572 duration: 2.905734288
+jemalloc 5.1.0 mem: 153852 duration: 2.925958087
+jemalloc 5.2.0 mem: 162008 duration: 2.837378225
+jemalloc 5.2.1 mem: 155912 duration: 2.922026484
+lockless 1.4 mem: 249540 duration: 2.858882662
+Hoard HEAD mem: 182500 duration: 2.988038568
 ```
 
 
+### Single threaded
+
+```
+sam@arch allocator_bench % STRESS_THREADS=1 ruby test_all.rb
+ruby 2.6.5p114 (2019-10-01 revision 67812) [x86_64-linux]
+built-in mem: 169444 duration: 3.295604446
+built-in mem (MALLOC_ARENA_MAX=2): 162400 duration: 3.309020006
+mimalloc master: 143520 duration: 3.216014001
+rpmalloc master: 158732 duration: 3.183002545
+tcmalloc 2.0 mem: 137736 duration: 3.21834025
+tcmalloc 2.1 mem: 138532 duration: 3.199263054
+tcmalloc 2.2 mem: 171124 duration: 2.793094939
+tcmalloc 2.3 mem: 140144 duration: 3.157911078
+tcmalloc 2.4 mem: 169384 duration: 2.777076104
+tcmalloc 2.5 mem: 169816 duration: 2.703555291
+tcmalloc 2.6 mem: 172612 duration: 2.619339545
+tcmalloc 2.6.1 mem: 172512 duration: 2.601444421
+tcmalloc 2.6.2 mem: 144872 duration: 2.887256198
+tcmalloc 2.6.3 mem: 159620 duration: 2.526488765
+tcmalloc 2.7 mem: 173096 duration: 2.619000445
+jemalloc 3.5.1 mem: 144348 duration: 3.04128121
+jemalloc 3.6.0 mem: 144320 duration: 3.053938303
+jemalloc 4.0.0 mem: 182760 duration: 3.016305146
+jemalloc 4.0.1 mem: 169596 duration: 2.972724988
+jemalloc 4.0.2 mem: 168892 duration: 2.928217891
+jemalloc 4.0.3 mem: 168924 duration: 2.952081469
+jemalloc 4.0.4 mem: 161744 duration: 2.820295919
+jemalloc 4.1.0 mem: 169072 duration: 2.915838045
+jemalloc 4.1.1 mem: 169064 duration: 2.949833676
+jemalloc 4.2.0 mem: 179084 duration: 2.922669411
+jemalloc 4.2.1 mem: 169128 duration: 2.900649117
+jemalloc 4.3.0 mem: 176408 duration: 3.083000318
+jemalloc 4.3.1 mem: 168748 duration: 2.90019844
+jemalloc 4.4.0 mem: 168928 duration: 2.896176489
+jemalloc 4.5.0 mem: 174472 duration: 2.785766161
+jemalloc 5.0.0 mem: 149940 duration: 2.896406334
+jemalloc 5.0.1 mem: 150204 duration: 2.837875746
+jemalloc 5.1.0 mem: 148476 duration: 2.824247363
+jemalloc 5.2.0 mem: 168224 duration: 2.763762322
+jemalloc 5.2.1 mem: 149664 duration: 2.930834257
+lockless 1.4 mem: 164468 duration: 2.873501934
+Hoard HEAD mem: 174396 duration: 2.903436464
+```
 
 
 Results: (old)
